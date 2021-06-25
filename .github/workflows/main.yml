@@ -6,7 +6,7 @@ name: main
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ dev ]
+    branches: [ master, dev ]
   # Allows you to run this workflow manually from the Actions tab
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -28,3 +28,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a one-line script
         run: ls -al
+
+      - name: Run python script
+        run: python3 temp.py
