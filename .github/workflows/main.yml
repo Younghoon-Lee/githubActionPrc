@@ -31,3 +31,12 @@ jobs:
 
       - name: Run python script
         run: python3 temp.py
+      - name: version check
+        run: |
+          python --version
+          python3 --version
+          node --version
+          npm --version
+          pip --version
+
+
