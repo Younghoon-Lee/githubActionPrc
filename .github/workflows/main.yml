@@ -4,7 +4,8 @@ name: main
 on:
   push:
     branches: [ master, dev ]
-
+    
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
