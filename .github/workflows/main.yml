@@ -38,4 +38,5 @@ jobs:
           npm --version
           pip --version
           pip3 --version
+          pip install jupyter
 
