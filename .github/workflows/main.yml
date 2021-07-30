@@ -28,8 +28,6 @@ jobs:
       - name: Run a one-line script
         run: ls -al
 
-      - name: Run python script
-        run: python3 temp.py
       - name: version check
         run: |
           python --version
