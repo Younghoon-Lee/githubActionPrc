@@ -37,5 +37,5 @@ jobs:
           pip --version
           pip3 --version
           pip install jupyter
-          jupyter --version
+          
 
