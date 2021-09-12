@@ -184,5 +184,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-temp.py
+
 decorator.py
