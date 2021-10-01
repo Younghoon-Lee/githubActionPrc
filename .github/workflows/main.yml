@@ -34,7 +34,7 @@ jobs:
           python3 --version
           node --version
           pip --version
-          lsb_release
+          
 
           
           
