@@ -1,28 +1,35 @@
 import torch
+import os
+import argparse
 from collections import OrderedDict
 
-model = torch.load('./iter_22000.pth')
-print(len(model['state_dict']))
-model2 = torch.load('./iter_23000.pth')
-model3 = torch.load('./iter_24000.pth')
-model4 = torch.load('./iter_25000.pth')
-model5 = torch.load('./best_mIoU_iter_20000.pth')
-temp2 = model2['state_dict']
-temp = model['state_dict']
-temp3 = model3['state_dict']
-temp4 = model4['state_dict']
-temp5 = model5['state_dict']
+def main(args):
+    swa_path = args.swa_dir
+    swa_list = os.listdir(swa_path)
+    print(swa_list)
+    sample = torch.load(os.path.join(args.swa_dir,swa_list[0]))
+    swa_len = len(swa_list)
+    state_dict_list = []
+    for swa in swa_list:
+        # import pdb; pdb.set_trace()
+        model = torch.load(os.path.join(args.swa_dir,swa))
+        state_dict = model
+        state_dict_list.append(state_dict)
+    
+    result = OrderedDict()
+    
+    for k in state_dict_list[0]:
+        temp = 0
+        for i in range(swa_len):
+            temp += state_dict_list[i][k]
+        result[k] = temp
+        result[k] =result[k]/float(swa_len)
+    # sample['state_dict'] = result
+    torch.save(result,'./swa.pth')
 
-result = OrderedDict()
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--swa_dir',type=str,default='./swa')
+    args = parser.parse_args()
 
-# print(model['state_dict'].keys())
-for k, v in temp.items():
-    result[k] = (temp[k] + temp2[k] + temp3[k] + temp4[k]+ temp5[k])/5.0
-
-model5['state_dict'] = result
-torch.save(model5,'SWA.pth')
-# print(result)
-# print(temp)
-# sum = Counter(model['state_dict']) + Counter(model2['state_dict'])
-# result = dict(sum)
-# print(len(result))
+    main(args)
