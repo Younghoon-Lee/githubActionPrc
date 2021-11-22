@@ -63,9 +63,8 @@ class UPerNet(nn.Module):
         # conv_out = self.conv_seg(conv_out)
         # conv_out = self.drop_out(conv_out)
         conv5 = conv_out[-1]
-        print(conv5)
         input_size = conv5.size()
-        print(input_size)
+      
         ppm_out = [conv5]
         for pool_scale, pool_conv in zip(self.ppm_pooling, self.ppm_conv):
             print(pool_scale)
